@@ -110,7 +110,7 @@
 </section>
 
 <!-- Paper abstract -->
-<section class="section hero is-small">
+<!-- <section class="section hero is-small"> -->
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
@@ -123,30 +123,74 @@ To further mitigate the domain gap between synthetic and real-world data, we int
       </div>
     </div>
   </div>
-</section>
 <!-- End paper abstract -->
 
+  <br>
 <!-- Main idea -->
-<!-- <section class="hero is-small">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <h2 class="title is-3">Main idea</h2>
-      <div class="row">
-        <div class="col-lg-16 text-white">
-          <img class="img-fluid mb-3" src="static/images/teaser-v4.svg" alt="" >
-        </div>
-      </div>      
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+      <h2 class="title is-3">Main Idea</h2>
       <div class="content has-text-justified is-four-fifths">
-        <p>
-          <strong>AdaptiveISP</strong> takes a raw image as input and automatically generates an optimal ISP pipeline &Mu; and the associated ISP parameters &Theta;
-          to maximize the detection performance for any given pre-trained object detection network with deep reinforcement learning. 
-          <strong>AdaptiveISP</strong> achieved mAP@0.5 of 71.4 on the dataset LOD dataset, while a baseline method with a fixed ISP pipeline and optimized parameters can only achieve mAP@0.5 of 70.1.
-          Note that <strong>AdaptiveISP</strong> predicts the ISP for the image captured under normal light requires a CCM module, while the ISP for the image captured under low light requires a Desaturation module.
-        </p>
-      </div>
+
+        <strong style="color:#2f5faf;">The generalization of learning-based high dynamic range (HDR) fusion is often limited by the availability of training data, as collecting large-scale HDR images from dynamic scenes is both costly and technically challenging. To address these challenges: </strong>
+        <ul>
+          <li> 
+            We propose <strong>S2R-HDR</strong>, the first large-scale high-quality synthetic dataset for HDR fusion, with 24,000 HDR samples. 
+            Using Unreal Engine 5, we design a diverse set of realistic HDR scenes that encompass various dynamic elements, motion types, high dynamic range scenes, and lighting.
+            <p></p>
+            <figure style="text-align:center;">
+              <img src="static/images/Dataset_a.png" alt="" >
+              <figcaption style="font-size:0.7em; color:#555;font-style: italic; text-align: center;">
+                Illustration of our S2R-HDR dataset, covering both indoor and outdoor environments under diverse lighting conditions, including daytime, dusk, and nighttime, as well as various motion types such as humans, animals, and vehicles.
+              </figcaption>
+            </figure>
+          </li>
+          <li> 
+            To further mitigate the domain gap between synthetic and real-world data, we introduce <strong>S2R-Adapter</strong>, a domain adaptation designed to bridge this gap and enhance the generalization ability of models.
+            <p></p>
+            <figure style="text-align:center;">
+              <img src="static/images/Method.jpg" alt="" >
+              <figcaption style="font-size:0.7em; color:#555;font-style: italic; text-align: center;">
+                Structure of S2R-Adapter and t-SNE visualization of feature representations from different branches.
+              </figcaption>
+            </figure>
+          </li>
+        </ul>
+      </div> 
   </div>
   </div>
-</section> -->
+
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+      <h2 class="title is-3">Visual Results</h2>
+      <div class="content has-text-justified is-four-fifths">
+        <figure style="text-align:center;">
+          <img src="static/images/Teaser-v6.png" alt="" >
+          <figcaption style="font-size:0.7em; color:#555;font-style: italic; text-align: center;">
+            Comparing HDR fusion models trained on our S2R-HDR dataset, with the proposed domain adapter S2R-Adapter, with the same model trained on previous SCT and Challenge123 datasets. 
+            Results show our dataset and training scheme can reduce ghosting artifacts under large motion (left) and recover very high dynamic range scenes, such as direct sunlight (right).
+          </figcaption>
+        </figure>
+
+        <figure style="text-align:center;">
+          <img src="static/images/Main-results-with-gt-v1.png" alt="" >
+          <figcaption style="font-size:0.7em; color:#555;font-style: italic; text-align: center;">
+            Visual results on the SCT datasets (left) and Challenge123 datasets (right) with ground-truth training data. Our method effectively eliminates artifacts caused by motion occlusions, delivering superior visual quality.
+          </figcaption>
+        </figure>
+
+        <figure style="text-align:center;">
+          <img src="static/images/Main-results-without-gt-v1.png" alt="" >
+          <figcaption style="font-size:0.7em; color:#555;font-style: italic; text-align: center;">
+            Visual results on real-captured scenes show our solution reduces ghosting in backlit scenes (left) and recovers highlights (right).
+          </figcaption>
+        </figure>
+      </div> 
+  </div>
+  </div>
+</section>
 
   
 <!-- Youtube video -->
@@ -191,14 +235,12 @@ To further mitigate the domain gap between synthetic and real-world data, we int
 <footer class="footer">
 <div class="container">
   <div class="columns is-centered">
-    <div class="column is-8">
-      <div class="content" style="text-align: center;">
-        <p>
-          This website was modified from <a href="https://nerfies.github.io" target="_blank">Nerfies</a>. Thanks for sharing this fantastic template. <br> 
-          Also, this website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-          Commons Attribution-ShareAlike 4.0 International License</a>.
-        </p>
-      </div>
+    <div class="content" style="text-align: center;">
+      <p>
+        This website was modified from <a href="https://nerfies.github.io" target="_blank">Nerfies</a>. Thanks for sharing this fantastic template. <br> 
+        Also, this website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+        Commons Attribution-ShareAlike 4.0 International License</a>.
+      </p>
     </div>
   </div>
 </div>
@@ -208,14 +250,6 @@ To further mitigate the domain gap between synthetic and real-world data, we int
   <script src="static/js/jquery.min.js"></script>
   <script src="static/js/jquery.event.move.js"></script>
   <script src="static/js/jquery.twentytwenty.js"></script>
-  <script>
-    $(window).load(function(){
-      $(".twentytwenty-container[data='raw-ours']").twentytwenty({default_offset_pct: 0.38, before_label: "Raw-domian Denoising", after_label: "Dual-domian Denoising (Ours)", move_slider_on_hover: false, click_to_move: true});
-      $(".twentytwenty-container[data='sRGB-ours']").twentytwenty({default_offset_pct: 0.38, before_label: "sRGB-domian Denoising", after_label: "Dual-domian Denoising (Ours)", move_slider_on_hover: false, click_to_move: true});
-      $(".twentytwenty-container[data='ISP-ours']").twentytwenty({default_offset_pct: 0.38, before_label: "Camera ISPs", after_label: "DualDn (Ours)", move_slider_on_hover: false, click_to_move: true});
-    });
-    </script>
-
 </body>
 
 </html>
