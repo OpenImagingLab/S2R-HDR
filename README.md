@@ -107,7 +107,9 @@ Download all dataset to `./data` path.
                 - exposure.txt
                 - HDRImg.tif
     ```
--- 
+- Preprocess S2R-HDR dataset.
+    ```python preprocess_s2r_hdr_data.py```
+
 ## 🛠️ Training
 ### Training model on S2R-HDR datasets.
 - Training SCTNet model on S2R-HDR datasets.
