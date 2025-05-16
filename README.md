@@ -7,23 +7,6 @@ Yujin Wang, Jiarui Wu, Yichen Bian, Fan Zhang, Tianfan Xue<br><br>
 
 S2R-HDR is a large-scale synthetic dataset for high dynamic range (HDR) reconstruction tasks.  It contains 1,000 motion sequences, each comprising 24 images at 1920×1080 resolution, with a total of **24,000 images**.  To support flexible data augmentation, all images are stored in **EXR format with linear HDR values**.  The dataset is rendered using Unreal Engine 5 and our custom pipeline built upon XRFeitoria, encompassing diverse dynamic elements, motion patterns, HDR-compatible scenes, and varied lighting conditions.  Beyond the core imagery, we additionally provide per-frame rendered auxiliary data including optical flow, depth maps, surface normals, and diffuse albedo information, significantly expanding S2R-HDR's potential applications across various computer vision tasks.
 
-Note: 
-- The S2R-HDR dataset on HuggingFace is stored in two separate repository: 
-
-    https://huggingface.co/datasets/iimmortall/S2R-HDR
-
-    https://huggingface.co/datasets/iimmortall/S2R-HDR-2.
-
-- The S2R-HDR dataset on Kaggle is stored in four separate repository: 
-    
-    https://www.kaggle.com/datasets/iimmortall/s2r-hdr
-
-    https://www.kaggle.com/datasets/iimmortall/s2r-hdr
-
-    https://www.kaggle.com/datasets/iimmortall/s2r-hdr
-
-    https://www.kaggle.com/datasets/iimmortall/s2r-hdr
-
 <table>
     <tr>
       <td ><center><img src="https://i.postimg.cc/B6cR10Mj/1-img.gif" ></center></td>
@@ -54,6 +37,24 @@ Note:
         <td ><center>Normal</center></td>
     </tr>
 </table>
+
+Note: 
+- The S2R-HDR dataset on HuggingFace is stored in two separate repository: 
+
+    https://huggingface.co/datasets/iimmortall/S2R-HDR
+
+    https://huggingface.co/datasets/iimmortall/S2R-HDR-2.
+
+- The S2R-HDR dataset on Kaggle is stored in four separate repository: 
+    
+    https://www.kaggle.com/datasets/iimmortall/s2r-hdr
+
+    https://www.kaggle.com/datasets/iimmortall/s2r-hdr
+
+    https://www.kaggle.com/datasets/iimmortall/s2r-hdr
+
+    https://www.kaggle.com/datasets/iimmortall/s2r-hdr
+
 
 ## 🛠️ Installation
 1. Install Anaconda or Miniconda.
