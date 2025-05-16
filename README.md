@@ -1,5 +1,5 @@
 ##  S2R-HDR: A Large-Scale Rendered Dataset for HDR Fusion
-### [Project Page](https://openimaginglab.github.io/S2R-HDR/) | [ArXiv](https://arxiv.org/abs/2504.07667) | Hugging Face Dataset [part1](https://huggingface.co/datasets/iimmortall/S2R-HDR) [part2](https://huggingface.co/datasets/iimmortall/S2R-HDR-2) <br>
+### [Project Page](https://openimaginglab.github.io/S2R-HDR/) | [ArXiv](https://arxiv.org/abs/2504.07667) | Hugging Face [part1](https://huggingface.co/datasets/iimmortall/S2R-HDR) [part2](https://huggingface.co/datasets/iimmortall/S2R-HDR-2) <br>
 
 Yujin Wang, Jiarui Wu, Yichen Bian, Fan Zhang, Tianfan Xue<br><br>
 
@@ -7,7 +7,7 @@ Yujin Wang, Jiarui Wu, Yichen Bian, Fan Zhang, Tianfan Xue<br><br>
 
 S2R-HDR is a large-scale synthetic dataset for high dynamic range (HDR) reconstruction tasks.  It contains 1,000 motion sequences, each comprising 24 images at 1920×1080 resolution, with a total of **24,000 images**.  To support flexible data augmentation, all images are stored in **EXR format with linear HDR values**.  The dataset is rendered using Unreal Engine 5 and our custom pipeline built upon XRFeitoria, encompassing diverse dynamic elements, motion patterns, HDR-compatible scenes, and varied lighting conditions.  Beyond the core imagery, we additionally provide per-frame rendered auxiliary data including optical flow, depth maps, surface normals, and diffuse albedo information, significantly expanding S2R-HDR's potential applications across various computer vision tasks.
 
-Note: The S2R-hdr data is stored in two separate repository: 
+Note: The S2R-HDR dataset is stored in two separate repository: 
 
 https://huggingface.co/datasets/iimmortall/S2R-HDR
 
@@ -184,7 +184,7 @@ Please download this model to ./pretrained_models/ .
 ## 🛠️ Testing
 ### Adapt to real capture datasets with ground-truth.
 1. Using real capture datasets with ground-truth to train S2R-Adapter network.
-    - Adapt to SCT dataset with SCTNet method.
+    - Adapt to SCT training dataset with SCTNet (S2R-Adapter) method.
         ```shell
         # 8 GPU
         accelerate launch --multi_gpu --num_processes=8 \
@@ -202,7 +202,7 @@ Please download this model to ./pretrained_models/ .
             --scale2 1.0 \
             --batch_size=6 --num_workers=6 --lr 0.0002 --lr_min 0.0002 --test_interval 1
         ```  
-    - Adapt to Chalenge123 dataset with SCTNet method.
+    - Adapt to Chalenge123 training dataset with SCTNet (S2R-Adapter) method.
         ```shell
         # 8 GPU
         accelerate launch --multi_gpu --num_processes=8 \
@@ -220,7 +220,7 @@ Please download this model to ./pretrained_models/ .
             --scale2 1.0 \
             --batch_size=4 --num_workers=4 --lr 0.0002 --lr_min 0.0002 --test_interval 1
         ```
-    - Adapt to SCT dataset with SAFNet method.
+    - Adapt to SCT training dataset with SAFNet (S2R-Adapter) method.
         ```shell
         # 8 GPU
         accelerate launch --multi_gpu --num_processes=8 \
@@ -238,7 +238,7 @@ Please download this model to ./pretrained_models/ .
             --scale2 1.0 \
             --batch_size=4 --num_workers=4 --lr 0.0002 --lr_min 0.0002 --test_interval 1
         ```  
-    - Adapt to Chalenge123 dataset with SAFNet method.
+    - Adapt to Chalenge123 training dataset with SAFNet (S2R-Adapter) method.
         ```shell
         # 8 GPU
         accelerate launch --multi_gpu --num_processes=8 \
@@ -257,14 +257,14 @@ Please download this model to ./pretrained_models/ .
             --batch_size=4 --num_workers=4 --lr 0.0002 --lr_min 0.0002 --test_interval 1
         ```
 2. Testing adapted models on testing dataset.
-    - Adapt to SCT dataset with SCTNet method.
+    - Testing on SCT testing dataset with SCTNet (S2R-Adapter) method.
         ```shell
         CUDA_VISIBLE_DEVICES=0 python test_adapter_with_gt.py --save_results --model SCTNet \
             --pretrained_model pretrained_models/sctnet-adapter-with-gt-sct.pth \
             --save_dir experiments/sctnet-adapter-with-gt-sct/results_ada_sct_test_sct \
             --dataset_dir data/sct
         ```  
-    - Adapt to Chalenge123 dataset with SCTNet method.
+    - Testing on Chalenge123 testing dataset with SCTNet (S2R-Adapter) method.
         ```shell
         CUDA_VISIBLE_DEVICES=0 python test_adapter_with_gt.py --save_results --model SCTNet \
             --pretrained_model pretrained_models/sctnet-adapter-with-gt-challenge123.pth \
@@ -272,14 +272,14 @@ Please download this model to ./pretrained_models/ .
             --dataset_dir data/challenge123 \
             --data_name challenge123
         ```
-    - Adapt to SCT dataset with SAFNet method.
+    - Testing on SCT testing dataset with SAFNet (S2R-Adapter) method.
         ```shell
         CUDA_VISIBLE_DEVICES=0 python test_adapter_with_gt.py --save_results --model SAFNet \
             --pretrained_model pretrained_models/safnet-adapter-with-gt-sct.pth \
             --save_dir experiments/safnet-adapter-with-gt-sct/results_ada_sct_test_sct \
             --dataset_dir data/sct
         ``` 
-    - Adapt to Chalenge123 dataset with SAFNet method.
+    - Testing on Chalenge123 testing dataset with SAFNet (S2R-Adapter) method.
         ```shell
         CUDA_VISIBLE_DEVICES=0 python test_adapter_with_gt.py --save_results --model SAFNet \
             --pretrained_model pretrained_models/safnet-adapter-with-gt-challenge123.pth \
@@ -290,7 +290,41 @@ Please download this model to ./pretrained_models/ .
 
 ### Adapt to real capture datasets without ground-truth.
 Adapting to real capture datasets without ground truth during testing. In this example, we demonstrate how to adapt SAFNet to the SCT dataset, noting that ground truth information is unavailable to the model.
-- Adapt to SCT dataset (without ground-truth) with SAFNet model.
+- Adapt to SCT testing dataset (without ground-truth) with SCTNet model.
+    ```shell
+    CUDA_VISIBLE_DEVICES=0 python train_adapter_without_gt.py --adapter --adaptive_scale --save_results --logdir experiments/TTA-SCTNet-sct/ \
+        --data_name sct-cache \
+        --model SCTNet \
+        --dataset_dir data/sct \
+        --test_dataset_dir data/sct \
+        --test_interval 1 \
+        --resume pretrained_models/sctnet-s2r-hdr.pth \
+        --epochs 1 \
+        --tta_aug_type 1 \
+        --tta_img_num_patches 24 \
+        --model_lr 0.0001 \
+        --adapter_lr_scale 1 \
+        --batch_size 1 \
+        --model_ema_rate 0.999 \
+    ```
+- Adapt to Chalenge123 testing dataset (without ground-truth) with SCTNet model.
+    ```shell
+    CUDA_VISIBLE_DEVICES=0 python train_adapter_without_gt.py --adapter --adaptive_scale --save_results --logdir experiments/TTA-SCTNet-cha/ \
+        --data_name sct-cache \
+        --model SCTNet \
+        --dataset_dir data/challenge123 \
+        --test_dataset_dir data/challenge123 \
+        --test_interval 1 \
+        --resume pretrained_models/sctnet-s2r-hdr.pth \
+        --epochs 1 \
+        --tta_aug_type 1 \
+        --tta_img_num_patches 24 \
+        --model_lr 0.0001 \
+        --adapter_lr_scale 1 \
+        --batch_size 1 \
+        --model_ema_rate 0.999 \
+    ```
+- Adapt to SCT testing dataset (without ground-truth) with SAFNet model.
     ```shell
     CUDA_VISIBLE_DEVICES=0 python train_adapter_without_gt.py --adapter --adaptive_scale --save_results --logdir experiments/TTA-SAFNet-sct/ \
         --data_name sct-cache \
@@ -307,7 +341,23 @@ Adapting to real capture datasets without ground truth during testing. In this e
         --batch_size 1 \
         --model_ema_rate 0.999 \
     ```
-
+- Adapt to SCT testing dataset (without ground-truth) with SAFNet model.
+    ```shell
+    CUDA_VISIBLE_DEVICES=0 python train_adapter_without_gt.py --adapter --adaptive_scale --save_results --logdir experiments/TTA-SAFNet-cha/ \
+        --data_name sct-cache \
+        --model SAFNet \
+        --dataset_dir data/challenge123 \
+        --test_dataset_dir data/challenge123 \
+        --test_interval 1 \
+        --resume pretrained_models/safnet-s2r-hdr.pth \
+        --epochs 1 \
+        --tta_aug_type 1 \
+        --tta_img_num_patches 24 \
+        --model_lr 0.0001 \
+        --adapter_lr_scale 1 \
+        --batch_size 1 \
+        --model_ema_rate 0.999 \
+    ```
 
 ## Citation
 

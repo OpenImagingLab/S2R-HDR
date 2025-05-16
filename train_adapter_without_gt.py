@@ -382,7 +382,6 @@ def train(args, model, device, train_loader, optimizer, epoch, criterion, anchor
     
     # capture metrics
     save_dict = {
-        'epoch': epoch + 1,
         'state_dict': model.state_dict(),
         'optimizer': optimizer.state_dict()}
     if epoch % args.ckpt_interval == 0 or (epoch == args.epochs - 1):
@@ -606,7 +605,6 @@ def train_nogt(args, model, device, train_loader, optimizer, epoch, criterion, a
 
     # capture metrics
     save_dict = {
-        'epoch': epoch + 1,
         'state_dict': model.state_dict(),
         'optimizer': optimizer.state_dict()}
     if epoch % args.ckpt_interval == 0 or (epoch == args.epochs - 1):
@@ -687,7 +685,6 @@ def test(args, model, device, optimizer, epoch, cur_psnr, **kwargs):
         if psnr_mu.avg > cur_psnr[0]:
             # save_model
             save_dict = {
-                'epoch': epoch + 1,
                 'state_dict': model.state_dict(),
                 'optimizer': optimizer.state_dict()
             }
@@ -758,10 +755,6 @@ def main():
                 print(msg); f.write(msg+"\n")
                 checkpoint = torch.load(args.resume)
                 model.load_state_dict({k.replace('module.',''): v for k, v in checkpoint['state_dict'].items()})
-                # args.start_epoch = checkpoint['epoch']
-                # optimizer.load_state_dict(checkpoint['optimizer'])
-                msg = "===> Loaded checkpoint: epoch {}".format(checkpoint['epoch'])
-                print(msg); f.write(msg+"\n")
             else:
                 msg = "==> No checkpoint is founded at {}.".format(args.resume)
                 print(msg); f.write(msg+"\n")
