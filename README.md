@@ -1,8 +1,42 @@
 ##  S2R-HDR: A Large-Scale Rendered Dataset for HDR Fusion
-### [Project Page](https://openimaginglab.github.io/S2R-HDR/) | [ArXiv](https://arxiv.org/abs/2504.07667) | [Dataset (part1)](https://huggingface.co/datasets/iimmortall/S2R-HDR) [Dataset (part2)](https://huggingface.co/datasets/iimmortall/S2R-HDR-2) <br>
+### [Project Page](https://openimaginglab.github.io/S2R-HDR/) | [ArXiv](https://arxiv.org/abs/2504.07667) | Hugging Face Dataset [part1](https://huggingface.co/datasets/iimmortall/S2R-HDR) [part2](https://huggingface.co/datasets/iimmortall/S2R-HDR-2) <br>
 
 Yujin Wang, Jiarui Wu, Yichen Bian, Fan Zhang, Tianfan Xue<br><br>
 
+## ✨Dataset Summary
+
+S2R-HDR is a large-scale synthetic dataset for high dynamic range (HDR) reconstruction tasks.  It contains 1,000 motion sequences, each comprising 24 images at 1920×1080 resolution, with a total of **24,000 images**.  To support flexible data augmentation, all images are stored in **EXR format with linear HDR values**.  The dataset is rendered using Unreal Engine 5 and our custom pipeline built upon XRFeitoria, encompassing diverse dynamic elements, motion patterns, HDR-compatible scenes, and varied lighting conditions.  Beyond the core imagery, we additionally provide per-frame rendered auxiliary data including optical flow, depth maps, surface normals, and diffuse albedo information, significantly expanding S2R-HDR's potential applications across various computer vision tasks.
+
+Note: The S2R-hdr data is stored in two separate repository: 
+
+https://huggingface.co/datasets/iimmortall/S2R-HDR
+
+https://huggingface.co/datasets/iimmortall/S2R-HDR-2.
+
+| HDRs (Tone mapped)| Optical Flow| Depth |Diffuse | Normal |
+<table>
+    <tr>
+      <td ><center><img src="https://i.postimg.cc/B6cR10Mj/1-img.gif" ></center></td>
+      <td ><center><img src="https://i.postimg.cc/rF763cZr/1.gif"  ></center></td>
+      <td ><center><img src="https://i.postimg.cc/J73RbwGc/1-depth.gif"  ></center></td>
+      <td ><center><img src="https://i.postimg.cc/DwSVpRyN/1-diffuse.gif"  ></center></td>
+      <td ><center><img src="https://i.postimg.cc/cHNVHHMq/1-normal.gif"  ></center></td>
+    </tr>
+    <tr>
+      <td ><center><img src="https://i.postimg.cc/nr1s5CTn/2-img.gif" ></center></td>
+      <td ><center><img src="https://i.postimg.cc/zGWm1M4P/2.gif"  ></center></td>
+      <td ><center><img src="https://i.postimg.cc/W4ZBTrZ6/2-depth.gif"  ></center></td>
+      <td ><center><img src="https://i.postimg.cc/mkLJY558/2-diffuse.gif"  ></center></td>
+      <td ><center><img src="https://i.postimg.cc/kgGV1MSd/2-normal.gif"  ></center></td>
+    </tr>
+    <tr>
+      <td ><center><img src="https://i.postimg.cc/ZYjKGt4Y/3-img.gif" ></center></td>
+      <td ><center><img src="https://i.postimg.cc/bvHKZnyx/3.gif"  ></center></td>
+      <td ><center><img src="https://i.postimg.cc/gJHkc1hD/3-depth.gif"  ></center></td>
+      <td ><center><img src="https://i.postimg.cc/qqBBNQXd/3-diffuse.gif"  ></center></td>
+      <td ><center><img src="https://i.postimg.cc/7Y6YDsZ3/3-normal.gif"  ></center></td>
+    </tr>
+</table>
 
 ## 🛠️ Installation
 1. Install Anaconda or Miniconda.
@@ -40,8 +74,11 @@ Download all dataset to `./data` path.
     # download part2
     snapshot_download(repo_id='iimmortall/S2R-HDR-2',
                     repo_type="dataset",
-                    local_dir='./data/S2R-HDR', # setting save path
+                    local_dir='./data/S2R-HDR-2', # setting save path
                     resume_download=True)
+    ```
+    ```shell
+    mv ./data/S2R-HDR-2/* ./data/S2R-HDR/
     ```
 - Downlaod S2R-HDR dataset from Kaggle, [kagglehub guidelines](https://github.com/Kaggle/kagglehub).
     ``` python
@@ -208,4 +245,4 @@ Please cite us if our work is useful for your research.
 
 ## Acknowledgements
 
-This project is based on [Unreal Engine5](https://www.unrealengine.com/en-US/unreal-engine-5), [HDR-Transformer](https://github.com/liuzhen03/HDR-Transformer-PyTorch), [SCTNet](https://github.com/Zongwei97/SCTNet), and [SAFNet](https://github.com/ltkong218/SAFNet). Thanks for their awesome work.
+This project is based on [Unreal Engine5](https://www.unrealengine.com/en-US/unreal-engine-5), [xrfeitoria](https://github.com/openxrlab/xrfeitoria/), [HDR-Transformer](https://github.com/liuzhen03/HDR-Transformer-PyTorch), [SCTNet](https://github.com/Zongwei97/SCTNet), and [SAFNet](https://github.com/ltkong218/SAFNet). Thanks for their awesome work.
