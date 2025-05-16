@@ -258,8 +258,8 @@ Please download this model to ./pretrained_models/ .
         ```  
     - Adapt to Chalenge123 training dataset with SAFNet (S2R-Adapter) method.
         ```shell
-        # 4 GPU
-        accelerate launch --multi_gpu --num_processes=4 \
+        # 8 GPU
+        accelerate launch --multi_gpu --num_processes=8 \
             train_adapter_with_gt.py --model SAFNet \
             --data_name challenge123-cache --dataset_dir data/challenge123 \
             --test_dataset_dir ../../datasets/ImageHDR/challenge123 \
@@ -323,7 +323,7 @@ Adapting to real capture datasets without ground truth during testing. In this e
         --model_lr 0.0001 \
         --adapter_lr_scale 1 \
         --batch_size 1 \
-        --model_ema_rate 0.999 \
+        --model_ema_rate 0.999
     ```
 - Adapt to Chalenge123 testing dataset (without ground-truth) with SCTNet model.
     ```shell
@@ -340,7 +340,7 @@ Adapting to real capture datasets without ground truth during testing. In this e
         --model_lr 0.0001 \
         --adapter_lr_scale 1 \
         --batch_size 1 \
-        --model_ema_rate 0.999 \
+        --model_ema_rate 0.999
     ```
 - Adapt to SCT testing dataset (without ground-truth) with SAFNet model.
     ```shell
@@ -357,7 +357,7 @@ Adapting to real capture datasets without ground truth during testing. In this e
         --model_lr 0.0001 \
         --adapter_lr_scale 1 \
         --batch_size 1 \
-        --model_ema_rate 0.999 \
+        --model_ema_rate 0.999
     ```
 - Adapt to challenge123 testing dataset (without ground-truth) with SAFNet model.
     ```shell
@@ -374,7 +374,7 @@ Adapting to real capture datasets without ground truth during testing. In this e
         --model_lr 0.0001 \
         --adapter_lr_scale 1 \
         --batch_size 1 \
-        --model_ema_rate 0.999 \
+        --model_ema_rate 0.999
     ```
 
 ## Citation
