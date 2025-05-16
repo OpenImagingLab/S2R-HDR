@@ -13,7 +13,6 @@ https://huggingface.co/datasets/iimmortall/S2R-HDR
 
 https://huggingface.co/datasets/iimmortall/S2R-HDR-2.
 
-| HDRs (Tone mapped)| Optical Flow| Depth |Diffuse | Normal |
 <table>
     <tr>
       <td ><center><img src="https://i.postimg.cc/B6cR10Mj/1-img.gif" ></center></td>
@@ -35,6 +34,13 @@ https://huggingface.co/datasets/iimmortall/S2R-HDR-2.
       <td ><center><img src="https://i.postimg.cc/gJHkc1hD/3-depth.gif"  ></center></td>
       <td ><center><img src="https://i.postimg.cc/qqBBNQXd/3-diffuse.gif"  ></center></td>
       <td ><center><img src="https://i.postimg.cc/7Y6YDsZ3/3-normal.gif"  ></center></td>
+    </tr>
+    <tr>
+        <td ><center>HDRs</center></td>
+        <td ><center>Optical Flow</center></td>
+        <td ><center>Depth</center></td>
+        <td ><center>Diffuse</center></td>
+        <td ><center>Normal</center></td>
     </tr>
 </table>
 
@@ -62,7 +68,7 @@ https://huggingface.co/datasets/iimmortall/S2R-HDR-2.
 ## 🛠️ Prepare Dataset
 Download all dataset to `./data` path.
 
-- Downlaod S2R-HDR dataset from Hugging Face.
+- Downlaod S2R-HDR dataset from Hugging Face (Recommend).
 
     ``` python
     from huggingface_hub import snapshot_download
@@ -200,7 +206,7 @@ Please download this model to ./pretrained_models/ .
             --learn_scale \
             --scale1 1.0 \
             --scale2 1.0 \
-            --batch_size=6 --num_workers=6 --lr 0.0002 --lr_min 0.0002 --test_interval 1
+            --batch_size=4 --num_workers=4 --lr 0.0002 --lr_min 0.0001 --test_interval 1
         ```  
     - Adapt to Chalenge123 training dataset with SCTNet (S2R-Adapter) method.
         ```shell
@@ -218,7 +224,7 @@ Please download this model to ./pretrained_models/ .
             --learn_scale \
             --scale1 1.0 \
             --scale2 1.0 \
-            --batch_size=4 --num_workers=4 --lr 0.0002 --lr_min 0.0002 --test_interval 1
+            --batch_size=4 --num_workers=4 --lr 0.0002 --lr_min 0.0001 --test_interval 1
         ```
     - Adapt to SCT training dataset with SAFNet (S2R-Adapter) method.
         ```shell
@@ -236,12 +242,12 @@ Please download this model to ./pretrained_models/ .
             --learn_scale \
             --scale1 1.0 \
             --scale2 1.0 \
-            --batch_size=4 --num_workers=4 --lr 0.0002 --lr_min 0.0002 --test_interval 1
+            --batch_size=4 --num_workers=4 --lr 0.0002 --lr_min 0.0001 --test_interval 1
         ```  
     - Adapt to Chalenge123 training dataset with SAFNet (S2R-Adapter) method.
         ```shell
-        # 8 GPU
-        accelerate launch --multi_gpu --num_processes=8 \
+        # 4 GPU
+        accelerate launch --multi_gpu --num_processes=4 \
             train_adapter_with_gt.py --model SAFNet \
             --data_name challenge123-cache --dataset_dir data/challenge123 \
             --test_dataset_dir ../../datasets/ImageHDR/challenge123 \
@@ -254,7 +260,7 @@ Please download this model to ./pretrained_models/ .
             --learn_scale \
             --scale1 1.0 \
             --scale2 1.0 \
-            --batch_size=4 --num_workers=4 --lr 0.0002 --lr_min 0.0002 --test_interval 1
+            --batch_size=4 --num_workers=4 --lr 0.0002 --lr_min 0.0001 --test_interval 1
         ```
 2. Testing adapted models on testing dataset.
     - Testing on SCT testing dataset with SCTNet (S2R-Adapter) method.
