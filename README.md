@@ -1,5 +1,5 @@
 ##  S2R-HDR: A Large-Scale Rendered Dataset for HDR Fusion
-### [Project Page](https://openimaginglab.github.io/S2R-HDR/) | [ArXiv](https://arxiv.org/abs/2504.07667) | Hugging Face [part1](https://huggingface.co/datasets/iimmortall/S2R-HDR) [part2](https://huggingface.co/datasets/iimmortall/S2R-HDR-2) | Kaggle [part1](https://www.kaggle.com/datasets/iimmortall/s2r-hdr) [part2](https://www.kaggle.com/datasets/iimmortall/s2r-hdr-2)[part3](https://www.kaggle.com/datasets/iimmortall/s2r-hdr-3)[part4](https://www.kaggle.com/datasets/iimmortall/s2r-hdr-4) <br>
+### [Project Page](https://openimaginglab.github.io/S2R-HDR/) | [ArXiv](https://arxiv.org/abs/2504.07667) | Hugging Face [part1](https://huggingface.co/datasets/iimmortall/S2R-HDR) [part2](https://huggingface.co/datasets/iimmortall/S2R-HDR-2) | Kaggle [part1](https://www.kaggle.com/datasets/iimmortall/s2r-hdr) [part2](https://www.kaggle.com/datasets/iimmortall/s2r-hdr-2) [part3](https://www.kaggle.com/datasets/iimmortall/s2r-hdr-3) [part4](https://www.kaggle.com/datasets/iimmortall/s2r-hdr-4) <br>
 
 Yujin Wang, Jiarui Wu, Yichen Bian, Fan Zhang, Tianfan Xue<br><br>
 
