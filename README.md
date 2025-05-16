@@ -1,5 +1,5 @@
 ##  S2R-HDR: A Large-Scale Rendered Dataset for HDR Fusion
-### [Project Page](https://openimaginglab.github.io/S2R-HDR/) | [ArXiv](https://arxiv.org/abs/2504.07667) | Hugging Face [part1](https://huggingface.co/datasets/iimmortall/S2R-HDR) [part2](https://huggingface.co/datasets/iimmortall/S2R-HDR-2) <br>
+### [Project Page](https://openimaginglab.github.io/S2R-HDR/) | [ArXiv](https://arxiv.org/abs/2504.07667) | Hugging Face [part1](https://huggingface.co/datasets/iimmortall/S2R-HDR) [part2](https://huggingface.co/datasets/iimmortall/S2R-HDR-2) | Kaggle [part1](https://www.kaggle.com/datasets/iimmortall/s2r-hdr) [part2](https://www.kaggle.com/datasets/iimmortall/s2r-hdr-2)[part3](https://www.kaggle.com/datasets/iimmortall/s2r-hdr-3)[part4](https://www.kaggle.com/datasets/iimmortall/s2r-hdr-4) <br>
 
 Yujin Wang, Jiarui Wu, Yichen Bian, Fan Zhang, Tianfan Xue<br><br>
 
@@ -7,11 +7,22 @@ Yujin Wang, Jiarui Wu, Yichen Bian, Fan Zhang, Tianfan Xue<br><br>
 
 S2R-HDR is a large-scale synthetic dataset for high dynamic range (HDR) reconstruction tasks.  It contains 1,000 motion sequences, each comprising 24 images at 1920×1080 resolution, with a total of **24,000 images**.  To support flexible data augmentation, all images are stored in **EXR format with linear HDR values**.  The dataset is rendered using Unreal Engine 5 and our custom pipeline built upon XRFeitoria, encompassing diverse dynamic elements, motion patterns, HDR-compatible scenes, and varied lighting conditions.  Beyond the core imagery, we additionally provide per-frame rendered auxiliary data including optical flow, depth maps, surface normals, and diffuse albedo information, significantly expanding S2R-HDR's potential applications across various computer vision tasks.
 
-Note: The S2R-HDR dataset is stored in two separate repository: 
+Note: 
+- The S2R-HDR dataset on HuggingFace is stored in two separate repository: 
 
-https://huggingface.co/datasets/iimmortall/S2R-HDR
+    https://huggingface.co/datasets/iimmortall/S2R-HDR
 
-https://huggingface.co/datasets/iimmortall/S2R-HDR-2.
+    https://huggingface.co/datasets/iimmortall/S2R-HDR-2.
+
+- The S2R-HDR dataset on Kaggle is stored in four separate repository: 
+    
+    https://www.kaggle.com/datasets/iimmortall/s2r-hdr
+
+    https://www.kaggle.com/datasets/iimmortall/s2r-hdr
+
+    https://www.kaggle.com/datasets/iimmortall/s2r-hdr
+
+    https://www.kaggle.com/datasets/iimmortall/s2r-hdr
 
 <table>
     <tr>
@@ -347,7 +358,7 @@ Adapting to real capture datasets without ground truth during testing. In this e
         --batch_size 1 \
         --model_ema_rate 0.999 \
     ```
-- Adapt to SCT testing dataset (without ground-truth) with SAFNet model.
+- Adapt to challenge123 testing dataset (without ground-truth) with SAFNet model.
     ```shell
     CUDA_VISIBLE_DEVICES=0 python train_adapter_without_gt.py --adapter --adaptive_scale --save_results --logdir experiments/TTA-SAFNet-cha/ \
         --data_name sct-cache \
