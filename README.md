@@ -111,7 +111,7 @@ Download all dataset to `./data` path.
     echo "successful"
     ```
 - All data structure:
-    ``` shell
+    ```
     - S2R-HDR
         - scene_0_FM
             - camera_params
@@ -150,7 +150,7 @@ Download all dataset to `./data` path.
 ## 🛠️ Training
 ### Training model on S2R-HDR datasets.
 - Training SCTNet model on S2R-HDR datasets.
-    ``` shell
+    ```shell
     # 8GPU
     accelerate launch --multi_gpu --num_processes=8 \
       train.py --model SCTNet \
@@ -158,7 +158,7 @@ Download all dataset to `./data` path.
       --test_dataset_dir data/sct \
       --logdir experiments/sctnet-s2r-hdr \
       --batch_size=8 --num_workers=8 --lr 0.0002 --test_interval 10
-    ```  
+    ```
 - Training SAFNet model on S2R-HDR datasets.
     ``` shell
     # 8GPU
@@ -170,11 +170,22 @@ Download all dataset to `./data` path.
       --batch_size=6 --num_workers=6 --lr 0.0002 --test_interval 10
     ``` 
 
+## 🛠️ Pretrained Models
+Please download this model to ./pretrained_models/ .
+| Model Name | Training Data | Adapter Data| Link |
+|------------|---------------|-------------|------|
+| SCTNet     | S2R-HDR | - | [sctnet-s2r-hdr.pth](https://github.com/OpenImagingLab/S2R-HDR/releases/download/v1.0/sctnet-s2r-hdr.pth) |
+| SAFNet     | S2R-HDR | - | [safnet-s2r-hdr.pth](https://github.com/OpenImagingLab/S2R-HDR/releases/download/v1.0/safnet-s2r-hdr.pth) |
+| SCTNet     | S2R-HDR | SCT | [sctnet-adapter-with-gt-sct.pth](https://github.com/OpenImagingLab/S2R-HDR/releases/download/v1.0/sctnet-adapter-with-gt-sct.pth) |
+| SCTNet     | S2R-HDR | Challenge123 | [sctnet-adapter-with-gt-challenge123.pth](https://github.com/OpenImagingLab/S2R-HDR/releases/download/v1.0/sctnet-adapter-with-gt-challenge123.pth) |
+| SAFNet     | S2R-HDR | SCT | [safnet-adapter-with-gt-sct.pth](https://github.com/OpenImagingLab/S2R-HDR/releases/download/v1.0/safnet-adapter-with-gt-sct.pth) |
+| SAFNet     | S2R-HDR | Challenge123 | [safnet-adapter-with-gt-challenge123.pth](https://github.com/OpenImagingLab/S2R-HDR/releases/download/v1.0/safnet-adapter-with-gt-challenge123.pth) |
+
 ## 🛠️ Testing
 ### Adapt to real capture datasets with ground-truth.
 1. Using real capture datasets with ground-truth to train S2R-Adapter network.
-    - Adapt to SCT dataset
-        ``` shell
+    - Adapt to SCT dataset with SCTNet method.
+        ```shell
         # 8 GPU
         accelerate launch --multi_gpu --num_processes=8 \
             train_adapter_with_gt.py --model SCTNet \
@@ -191,8 +202,8 @@ Download all dataset to `./data` path.
             --scale2 1.0 \
             --batch_size=6 --num_workers=6 --lr 0.0002 --lr_min 0.0002 --test_interval 1
         ```  
-    - Adapt to Chalenge123 dataset
-        ``` shell
+    - Adapt to Chalenge123 dataset with SCTNet method.
+        ```shell
         # 8 GPU
         accelerate launch --multi_gpu --num_processes=8 \
             train_adapter_with_gt.py --model SCTNet \
@@ -209,26 +220,93 @@ Download all dataset to `./data` path.
             --scale2 1.0 \
             --batch_size=4 --num_workers=4 --lr 0.0002 --lr_min 0.0002 --test_interval 1
         ```
+    - Adapt to SCT dataset with SAFNet method.
+        ```shell
+        # 8 GPU
+        accelerate launch --multi_gpu --num_processes=8 \
+            train_adapter_with_gt.py --model SAFNet \
+            --data_name sct-cache --dataset_dir data/sct \
+            --test_dataset_dir data/sct \
+            --logdir experiments/safnet-s2r-hdr-adapter-sct \
+            --resume pretrained_models/safnet-s2r-hdr.pth \
+            --epochs 30 \
+            --lr_scale 1.0 \
+            --r1 1 \
+            --r2 64 \
+            --learn_scale \
+            --scale1 1.0 \
+            --scale2 1.0 \
+            --batch_size=4 --num_workers=4 --lr 0.0002 --lr_min 0.0002 --test_interval 1
+        ```  
+    - Adapt to Chalenge123 dataset with SAFNet method.
+        ```shell
+        # 8 GPU
+        accelerate launch --multi_gpu --num_processes=8 \
+            train_adapter_with_gt.py --model SAFNet \
+            --data_name challenge123-cache --dataset_dir data/challenge123 \
+            --test_dataset_dir ../../datasets/ImageHDR/challenge123 \
+            --logdir experiments/safnet-s2r-hdr-adapter-cha \
+            --resume pretrained_models/safnet-s2r-hdr.pth \
+            --epochs 30 \
+            --lr_scale 1.0 \
+            --r1 1 \
+            --r2 64 \
+            --learn_scale \
+            --scale1 1.0 \
+            --scale2 1.0 \
+            --batch_size=4 --num_workers=4 --lr 0.0002 --lr_min 0.0002 --test_interval 1
+        ```
 2. Testing adapted models on testing dataset.
-    - Adapt to SCT dataset
-        ``` shell
+    - Adapt to SCT dataset with SCTNet method.
+        ```shell
         CUDA_VISIBLE_DEVICES=0 python test_adapter_with_gt.py --save_results --model SCTNet \
             --pretrained_model pretrained_models/sctnet-adapter-with-gt-sct.pth \
             --save_dir experiments/sctnet-adapter-with-gt-sct/results_ada_sct_test_sct \
             --dataset_dir data/sct
         ```  
-    - Adapt to Chalenge123 dataset
-        ``` shell
+    - Adapt to Chalenge123 dataset with SCTNet method.
+        ```shell
         CUDA_VISIBLE_DEVICES=0 python test_adapter_with_gt.py --save_results --model SCTNet \
-          --pretrained_model pretrained_models/sctnet-adapter-with-gt-challenge123.pth \
-          --save_dir experiments/sctnet-adapter-with-gt-cha/results_ada_cha_test_cha \
-          --dataset_dir data/challenge123 \
-          --data_name challenge123
+            --pretrained_model pretrained_models/sctnet-adapter-with-gt-challenge123.pth \
+            --save_dir experiments/sctnet-adapter-with-gt-cha/results_ada_cha_test_cha \
+            --dataset_dir data/challenge123 \
+            --data_name challenge123
         ```
-### Adapt to real capture datasets without ground-truth.
-``` shell
+    - Adapt to SCT dataset with SAFNet method.
+        ```shell
+        CUDA_VISIBLE_DEVICES=0 python test_adapter_with_gt.py --save_results --model SAFNet \
+            --pretrained_model pretrained_models/safnet-adapter-with-gt-sct.pth \
+            --save_dir experiments/safnet-adapter-with-gt-sct/results_ada_sct_test_sct \
+            --dataset_dir data/sct
+        ``` 
+    - Adapt to Chalenge123 dataset with SAFNet method.
+        ```shell
+        CUDA_VISIBLE_DEVICES=0 python test_adapter_with_gt.py --save_results --model SAFNet \
+            --pretrained_model pretrained_models/safnet-adapter-with-gt-challenge123.pth \
+            --save_dir experiments/safnet-adapter-with-gt-cha4/results_ada_cha_test_cha \
+            --dataset_dir data/challenge123 \
+            --data_name challenge123
+        ```
 
-```
+### Adapt to real capture datasets without ground-truth.
+Adapting to real capture datasets without ground truth during testing. In this example, we demonstrate how to adapt SAFNet to the SCT dataset, noting that ground truth information is unavailable to the model.
+- Adapt to SCT dataset (without ground-truth) with SAFNet model.
+    ```shell
+    CUDA_VISIBLE_DEVICES=0 python train_adapter_without_gt.py --adapter --adaptive_scale --save_results --logdir experiments/TTA-SAFNet-sct/ \
+        --data_name sct-cache \
+        --model SAFNet \
+        --dataset_dir data/sct \
+        --test_dataset_dir data/sct \
+        --test_interval 1 \
+        --resume pretrained_models/safnet-s2r-hdr.pth \
+        --epochs 1 \
+        --tta_aug_type 1 \
+        --tta_img_num_patches 24 \
+        --model_lr 0.0001 \
+        --adapter_lr_scale 1 \
+        --batch_size 1 \
+        --model_ema_rate 0.999 \
+    ```
 
 
 ## Citation
