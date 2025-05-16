@@ -65,12 +65,12 @@
                       </a>
                     </span>
                     <span class="link-block">
-                      <a href="" target="_blank"
+                      <a href="https://github.com/OpenImagingLab/S2R-HDR" target="_blank"
                         class="external-link button is-normal is-rounded is-dark">
                         <span class="icon">
                           <i class="fab fa-github"></i>
                         </span>
-                        <span>Code(Coming Soon)</span>
+                        <span>Code</span>
                       </a>
                     </span>
                     <span class="link-block">
@@ -146,7 +146,7 @@ To further mitigate the domain gap between synthetic and real-world data, we int
                 Illustration of our S2R-HDR dataset, covering both indoor and outdoor environments under diverse lighting conditions, including daytime, dusk, and nighttime, as well as various motion types such as humans, animals, and vehicles.
               </figcaption>
             </figure>
-
+            <figure style="text-align:center;">
             <table>
               <tr>
                 <td ><img src="static\images\gif\1_img.gif"  width="140"></td>
@@ -169,10 +169,18 @@ To further mitigate the domain gap between synthetic and real-world data, we int
                 <td ><img src="static\images\gif\3_diffuse.gif" width="140"  ></td>
                 <td ><img src="static\images\gif\3_normal.gif"  width="140" ></td>
               </tr>
+              <tr>
+                <td ><center>HDRs</center></td>
+                <td ><center>Optical Flow</center></td>
+                <td ><center>Depth</center></td>
+                <td ><center>Diffuse</center></td>
+                <td ><center>Normal</center></td>
+              </tr>
             </table>
             <figcaption style="font-size:0.7em; color:#555;font-style: italic; text-align: center;">
-              For each scene, we provide a total of five types of image data, as shown in the above figure, from left to right: the original image, optical flow, depth maps, diffuse albedo information, and surface normals.
+              Beyond the HDR sequences, we additionally provide per-frame rendered auxiliary data including optical flow, depth maps, surface normals, and diffuse albedo information, significantly expanding S2R-HDR's potential applications across various computer vision tasks.
             </figcaption>
+          </figure>
           </li>
           <li> 
             To further mitigate the domain gap between synthetic and real-world data, we introduce <strong>S2R-Adapter</strong>, a domain adaptation designed to bridge this gap and enhance the generalization ability of models.
